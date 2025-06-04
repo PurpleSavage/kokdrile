@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import style from '../css/landing.module.css'
 function Header() {
   return (
-    <header className="flex items-start overflow-hidden justify-center relative w-full ">
+    <header className="flex items-start overflow-hidden justify-center relative w-full h-screen">
       <video width="600" height="600" autoPlay loop muted playsInline className="">
         <source src="/black-hole.mp4" type="video/webm" />
         Tu navegador no soporta la reproducción de videos.
