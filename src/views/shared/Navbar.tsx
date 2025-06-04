@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 function Navbar() {
   const path =usePathname()
   return (
-    <nav className="sticky top-0 z-10 p-4 flex items-center border-b border-slate-600/50"  style={{ backdropFilter: 'blur(8px)' }}>
+    <nav className="sticky top-0 z-40 p-4 flex items-center border-b border-slate-600/50"  style={{ backdropFilter: 'blur(8px)' }}>
         <Link href="/" className="text-2xl font-bold text-white grow ">Kokodrile</Link>
         <div className="space-x-6">
             {
