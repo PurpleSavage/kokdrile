@@ -29,7 +29,7 @@ function CommunitySection() {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-white text-2xl font-semibold">
-              From the Community
+              De la comunidad
             </h2>
             <button className="text-white/70 hover:text-white text-sm font-medium transition-colors">
               View All
