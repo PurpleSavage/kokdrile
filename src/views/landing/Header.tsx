@@ -47,7 +47,7 @@ function Header() {
         </p>
 
         <Link
-          href="/auth"
+          href="/main"
           className="flex px-4 sm:px-6 gap-2 items-center 
         py-2 sm:py-3 bg-white text-black rounded-md hover:bg-slate-200 
         cursor-pointer text-sm sm:text-base font-medium transition-colors"

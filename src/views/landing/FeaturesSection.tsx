@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
-
-function FeaturesSection() {
-  const features = [
+const features = [
     {
       icon: "🎨",
       title: "IA Generativa Avanzada",
@@ -47,6 +45,8 @@ function FeaturesSection() {
     },
   ];
 
+function FeaturesSection() {
+  
   return (
     <section className="py-20 px-4 bg-black relative overflow-hidden">
       {/* Background Effects */}

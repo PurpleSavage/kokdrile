@@ -1,34 +1,37 @@
+import 'server-only'
 
+import { Connection } from "@/modules/data/connection";
 import { Image } from "../../domain/Image";
 import { ImageRepository } from "../../domain/imageRepository";
 import { GenerateImageDto } from "../../dto/generateImage.dto";
-import type OpenAI from "openai";
 
+import { OpenAIRepository } from "../../domain/openaiRepository";
+import { ImageModel } from "@/modules/data/models/ImageModel";
+import { ImageMapper } from "../mapper/ImageMapper";
+
+
+
+export interface ImageRaw {
+  _id: string;
+  context: string;
+  size: string;
+  url: string;
+}
 export class ImageRepositoryImpl implements ImageRepository {
-    constructor(private openia: OpenAI) {}
+    constructor(private openaiRepository: OpenAIRepository) {}
 
     async generateImage(generateImageDto: GenerateImageDto): Promise<Image> {
-        const { context } = generateImageDto;
 
         try {
-            const result = await this.openia.images.generate({
-                prompt: context,
-                n: 1,
-                size: "1024x1024",
-            });
-
-
-            if (!result.data || result.data.length === 0 || !result.data[0].url) {
-                throw new Error("No se pudo generar la imagen");
-            }
-
-            const imageUrl = result.data[0].url;
-
-            return {
-                url:imageUrl,
-                size:'1024x1024',
-                context
-            };
+            const connection = Connection.getInstance()
+            await connection.connect()
+            const result = await this.openaiRepository.generateImageDallee(generateImageDto)
+            const imagemodel = await ImageModel.create({
+                context:result.context,
+                size:result.size,
+                url:result.url
+            })
+            return ImageMapper.imageEntityFromObject(imagemodel.toObject() as ImageRaw)
         } catch (error) {
             console.error("Error al generar la imagen:", error);
             throw new Error("Error al generar la imagen");
