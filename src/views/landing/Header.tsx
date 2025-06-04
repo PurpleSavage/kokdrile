@@ -24,7 +24,7 @@ function Header() {
         <p className="text-xl text-gray-300 md:w-3/4 lg:w-3/4 font-bold text-center">Transforma conceptos en arte visual revolucionario. 
           Nuestra IA de última generación combina algoritmos RGB avanzados para crear imágenes que desafían la realidad.</p>
 
-        <Link href="" className="flex px-6 gap-2 items-center py-2 bg-white 
+        <Link href="/auth" className="flex px-6 gap-2 items-center py-2 bg-white 
         text-black rounded-md hover:bg-slate-200 cursor-pointer">
           Iniciar generación
           <FaArrowRight size={20}/>
