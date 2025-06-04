@@ -24,4 +24,18 @@ export async function POST(req: Request){
         console.log(error)
         return NextResponse.json({error:'Hubo un error',status:500})
     }
- }
+}
+
+
+export async function GET() {
+    try {
+        const openaiRepository = new OpenAIService(openai)
+        const imageRepositoryImpl = new ImageRepositoryImpl(openaiRepository)
+        const imageService = new ImageService(imageRepositoryImpl)
+        const response = await imageService.getIamges()
+        return NextResponse.json(response,{status:200})
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({error:'Hubo un error',status:500})
+    }
+}

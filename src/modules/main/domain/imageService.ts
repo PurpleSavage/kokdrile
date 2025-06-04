@@ -11,4 +11,7 @@ export class ImageService implements ImageRepository{
         
         return this.imageRepository.generateImage(generateImageDto)
     }
+    async getIamges(): Promise<Image[]> {
+        return this.imageRepository.getIamges()
+    }
 }

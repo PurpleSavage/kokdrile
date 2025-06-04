@@ -37,4 +37,15 @@ export class ImageRepositoryImpl implements ImageRepository {
             throw new Error("Error al generar la imagen");
         }
     }
+    async getIamges(): Promise<Image[]> {
+        try {
+            const connection = Connection.getInstance()
+            await connection.connect()
+            const images = await ImageModel.find()
+            return images.map(image=>ImageMapper.imageEntityFromObject(image.toObject() as ImageRaw))
+        } catch (error) {
+            console.error("Error al generar la imagen:", error);
+            throw new Error("Error al obtener imágenes");
+        }
+    }
 }

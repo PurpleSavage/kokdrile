@@ -4,4 +4,5 @@ import { Image } from "./Image";
 
 export interface ImageRepository{
     generateImage(generateImageDto:GenerateImageDto):Promise<Image>
+    getIamges():Promise<Image[]>
 }
