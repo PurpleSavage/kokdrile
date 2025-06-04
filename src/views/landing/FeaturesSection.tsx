@@ -99,7 +99,7 @@ function FeaturesSection() {
         {/* CTA */}
         <div className="w-full flex items-center justify-center mt-16">
           <Link
-            href="/auth"
+            href="/main"
             className="bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-200 transition-all 
             duration-200 shadow-lg hover:shadow-xl cursor-pointer flex items-center justify-center max-w-60 gap-2"
           >

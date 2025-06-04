@@ -1,42 +1,42 @@
-import 'server-only'
+import "server-only";
 
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 export class Connection {
-  private static instance: Connection
-  private mongoUrl: string
-  private dbName: string
-  private isConnected: boolean = false
+  private static instance: Connection;
+  private mongoUrl: string;
+  private dbName: string;
+  private isConnected: boolean = false;
 
   private constructor() {
-    this.mongoUrl = 'mongodb+srv://qubouserVituViKlok:bvXKFQLilci1tpKH@cluster0.iihlv.mongodb.net/kokodrile'
-    this.dbName = 'kokodrile'
+    this.mongoUrl = process.env.MONGODB_URL as string;
+    this.dbName = process.env.DATABASE_MONGO_NAME as string;
   }
 
   static getInstance(): Connection {
     if (!Connection.instance) {
-      Connection.instance = new Connection()
+      Connection.instance = new Connection();
     }
-    return Connection.instance
+    return Connection.instance;
   }
 
   async connect(): Promise<boolean> {
     if (this.isConnected) {
-      console.log('Mongo already connected')
-      return true
+      console.log("Mongo already connected");
+      return true;
     }
 
     try {
       await mongoose.connect(this.mongoUrl, {
-        dbName: this.dbName
-      })
+        dbName: this.dbName,
+      });
 
-      this.isConnected = true
-      console.log('Connected to DB:', mongoose.connection.name)
-      return true
+      this.isConnected = true;
+      console.log("Connected to DB:", mongoose.connection.name);
+      return true;
     } catch (error) {
-      console.error('Mongo connection error:', error)
-      throw error
+      console.error("Mongo connection error:", error);
+      throw error;
     }
   }
 }
