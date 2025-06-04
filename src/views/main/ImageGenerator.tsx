@@ -4,9 +4,11 @@ import { FaArrowUp } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa6";
 import { useState } from "react";
 import { GenerateImageDto } from "@/modules/main/dto/generateImage.dto";
+import { useImageStore } from "@/store/image.store";
 export default function ImageGenerator() {
     const [context,setContext]=useState('')
     const [isLoad,setIsLoad]=useState(false)
+    const addImage = useImageStore(state=>state.addImage)
     const handleSubmit=async (e:React.FormEvent)=>{
         e.preventDefault()
        try {
@@ -24,7 +26,7 @@ export default function ImageGenerator() {
                 body:JSON.stringify(generateImageDto)
             })
             const data = await response.json()
-            console.log(data)
+            addImage(data)
        } catch (error) {
             console.log(error)
        }finally{
