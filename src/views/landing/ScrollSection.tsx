@@ -160,7 +160,7 @@ function ScrollSection() {
     });
   }, []);
   return (
-    <section className={`text-white overflow-x-hidden bg-black`}>
+    <section className={`text-white overflow-x-hidden bg-black relative`}>
       <section id="hero" className={`${style.hero}`}>
         <div id="hero_img_container" className={`${style.hero_img_container}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

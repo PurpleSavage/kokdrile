@@ -36,7 +36,7 @@
   height: 100%;
 }
 
-.hero_img_logo {
+.hero_img_logo img {
   position: absolute;
   top: 20%;
   left: 50%;
@@ -45,16 +45,20 @@
   height: auto;
   object-fit: contain;
 }
+
+.hero_img_copy {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  will-change: opacity;
+}
+
 .hero_img_copy p {
   font-size: 0.65rem;
 }
 
 .fade_overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-color: #fff;
   will-change: opacity;
 }
