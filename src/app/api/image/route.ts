@@ -19,7 +19,7 @@ export async function POST(req: Request){
             return NextResponse.json({error,status:400})
         }
         const response =await imageService.generateImage(generateImageDto!)
-        return NextResponse.json({msg:response,status:200})
+        return NextResponse.json({response,status:200})
     } catch (error) {
         console.log(error)
         return NextResponse.json({error:'Hubo un error',status:500})

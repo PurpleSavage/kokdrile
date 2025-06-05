@@ -9,16 +9,19 @@ import { useImageStore } from "@/store/image.store";
 export default function ImageGenerator() {
   const [context, setContext] = useState("");
   const [isLoad, setIsLoad] = useState(false);
-  const addImage = useImageStore((state) => state.addImage);
   const setIsAdding = useImageStore((state) => state.setIsAdding);
-  const setNewImageId = useImageStore(state => state.setNewImageId);
-
+  const setNewImageId = useImageStore((state) => state.setNewImageId);
+  const newImageId = useImageStore((state) => state.newImageId);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoad(true);
     setIsAdding(true);
     try {
+      if (newImageId) {
+        setNewImageId(null);
+      }
+
       const [error, generateImageDto] = GenerateImageDto.create({ context });
       if (error) {
         console.log(error);
@@ -32,16 +35,13 @@ export default function ImageGenerator() {
       });
 
       const image = await res.json(); // probablemente con url: null
-      addImage(image); // Mostrar el esqueleto en base a este objeto
       setNewImageId(image.id);
-
-
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoad(false);
       setIsAdding(false);
-      setContext("")
+      setContext("");
     }
   };
 

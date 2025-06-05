@@ -22,6 +22,7 @@ export default function ListImages() {
         setIsLoad(true);
         const response = await fetch("/api/image");
         const data = await response.json();
+        console.log(data);
         setImages(data);
       } catch (error) {
         console.error(error);
@@ -38,24 +39,29 @@ export default function ListImages() {
     }
 
     let retries = 0;
-    const MAX_RETRIES = 5;
-    const RETRY_DELAY = 3000;
+    const MAX_RETRIES = 2;
+    const RETRY_DELAY = 8000;
 
     const retryFetch = async () => {
       retries++;
       try {
         const res = await fetch("/api/image");
         const data = await res.json();
-
+        console.log(data);
         const newImage = data.find((img: ImageType) => img.id === newImageId);
 
         if (newImage && newImage.url) {
-          setImages(data);
+          const uniqueImages = data.filter(
+            (img: ImageType, index: number, self: ImageType[]) =>
+              index === self.findIndex((t) => t.id === img.id)
+          );
+          setImages(uniqueImages);
           useImageStore.getState().setNewImageId(null); // ya cargó, limpia estado
         } else if (retries < MAX_RETRIES) {
           setTimeout(retryFetch, RETRY_DELAY);
         } else {
           // si quieres puedes mostrar error o mensaje
+          setError("ocurrió un error al cargar");
         }
       } catch (error) {
         console.log(error);
@@ -63,7 +69,10 @@ export default function ListImages() {
           setTimeout(retryFetch, RETRY_DELAY);
         } else {
           // manejar error
+          setError("ocurrió un error al cargar las imágenes");
         }
+      } finally {
+        setIsLoad(false);
       }
     };
 
@@ -102,6 +111,7 @@ export default function ListImages() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {isAdding && <ImageCardSkeleton key="skeleton-placeholder" />}
             {images.map((image) => (
               <ImageCard
                 key={image.id}
@@ -109,7 +119,6 @@ export default function ListImages() {
                 onClick={() => setSelectedImage(image)}
               />
             ))}
-            {isAdding && <ImageCardSkeleton />}
           </div>
         </div>
       ) : (

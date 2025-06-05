@@ -18,6 +18,6 @@ export const useImageStore = create<ImageState>()((set) => ({
   setNewImageId: (id) => set({ newImageId: id }),
   setImages: (images) => set({ images }),
   addImage: (image) =>
-    set((state) => ({ images: [...state.images, image], isAdding: false })),
+    set((state) => ({ images: [image, ...state.images], isAdding: false })),
   setIsAdding: (value) => set({ isAdding: value }),
 }));
