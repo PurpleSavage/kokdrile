@@ -2,7 +2,7 @@
 import { GiReptileTail } from "react-icons/gi";
 import { FaArrowUp } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GenerateImageDto } from "@/modules/main/dto/generateImage.dto";
 import { useImageStore } from "@/store/image.store";
 
@@ -13,6 +13,9 @@ export default function ImageGenerator() {
   const setNewImageId = useImageStore((state) => state.setNewImageId);
   const newImageId = useImageStore((state) => state.newImageId);
 
+  useEffect(()=>{
+    setNewImageId(null);
+  },[setNewImageId])
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoad(true);
