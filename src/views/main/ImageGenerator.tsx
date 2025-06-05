@@ -49,8 +49,8 @@ export default function ImageGenerator() {
   };
 
   return (
-    <section className=" w-3/5 space-y-6">
-      <div className="space-y-2">
+    <section className=" w-3/5 space-y-6 ">
+      <div className="space-y-2 mt-20">
         <h2 className="text-4xl text-white flex items-center justify-center font-medium gap-5 text-center">
           Kokodrile
           <GiReptileTail size={30} color="white" />
