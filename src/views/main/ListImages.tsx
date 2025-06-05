@@ -111,14 +111,15 @@ export default function ListImages() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {isAdding && <ImageCardSkeleton key="skeleton-placeholder" />}
+            
             {images.map((image) => (
               <ImageCard
                 key={image.id}
                 image={image}
                 onClick={() => setSelectedImage(image)}
               />
-            ))}
+            ))}v
+            {isAdding && <ImageCardSkeleton key="skeleton-placeholder" />}
           </div>
         </div>
       ) : (
